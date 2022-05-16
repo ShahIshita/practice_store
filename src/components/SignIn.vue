@@ -1,13 +1,9 @@
 <template>
   <div>
     <base-card>
-      <h2>Form</h2>
+      <h2>SignIn</h2>
       <form @submit.prevent="submitForm">
-        <div class="form-control">
-          <label for="userName">Name: </label>
-          <input typ="text" id="userName" v-model.trim="userName" required />
-        </div>
-        <br />
+    
         <div class="form-control">
           <label for="email">E-Mail: </label>
           <input type="email" id="email" v-model.trim="email" required />
@@ -18,7 +14,7 @@
         </div>
         <br />
 
-        <base-button>SignUp</base-button>
+        <base-button>SignIn</base-button>
       </form>
       <br />
       <router-link to="/display">Go to Display</router-link>
@@ -37,7 +33,7 @@ export default {
   },
   data() {
     return {
-      userName: "",
+     
       email: "",
       password: "",
     };
@@ -45,15 +41,14 @@ export default {
 
   methods: {
     async submitForm() {
-      this.$store.dispatch("demo", {
-        userName: this.userName,
+      this.$store.dispatch("signinDemo", {
         email: this.email,
         password: this.password,
       });
 
      
 
-      // this.$router.push("/display");
+       this.$router.replace("/display");
     },
   },
   // created() {

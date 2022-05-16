@@ -1,30 +1,46 @@
 <template>
 <base-card>
+
    <div>
-    {{ userDetail.userName}}
+    {{ userDetails.userName}}
    </div> 
    <div>
-       {{ userDetail.email}}
+       {{ userDetails.email}}
    </div>
+   <base-button @click="logout">Logout</base-button>
 </base-card>
 </template>
 
 <script>
+import BaseButton from './ui/BaseButton.vue';
 import BaseCard from './ui/BaseCard.vue';
 export default {
-  components: { BaseCard },
-    created() {
-        console.log(this.$store.getters['test']);
-        let obj1=[]
-       obj1.userName = localStorage.getItem("userName");
-       obj1.email = localStorage.getItem("email");
-    this.$store.dispatch("demo", obj1);
+  components: { BaseCard, BaseButton },
+  data(){
+      return{
+          userDetails: {},
+      }
+  },
+  methods:{
+      logout(){
+        localStorage.removeItem('token');
+        localStorage.removeItem("userId");
+        this.$router.replace('/signin');
+      }
+  },
+  
+  computed: {
+        userObj(){
+            return this.$store.getters['userObj'];
+        },
     },
-    computed: {
-     userDetail() {
-         return this.$store.getters['test']
-     }
-    }
+    async created(){
+        await this.$store.dispatch('fetchData');
+        this.userDetails = this.userObj;
+    },
+  
+    
+    
 }
 </script>
 
