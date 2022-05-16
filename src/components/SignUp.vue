@@ -1,7 +1,7 @@
 <template>
   <div>
     <base-card>
-      <h2>Registration</h2>
+      <h2>Form</h2>
       <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="userName">Name: </label>
