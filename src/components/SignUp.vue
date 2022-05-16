@@ -1,0 +1,57 @@
+<template>
+  <div>
+    <base-card>
+      <h2>Registration</h2>
+      <form @submit.prevent="submitForm">
+        <div class="form-control">
+          <label for="userName">Name: </label>
+          <input typ="text" id="userName" v-model.trim="userName" required />
+        </div>
+        <br />
+        <div class="form-control">
+          <label for="email">E-Mail: </label>
+          <input type="email" id="email" v-model.trim="email" required />
+        </div>
+        <br />
+
+        <base-button>SignUp</base-button>
+      </form>
+      <br />
+      <router-link to="/display">Go to Display</router-link>
+    </base-card>
+  </div>
+</template>
+
+<script>
+import BaseButton from "./ui/BaseButton.vue";
+import BaseCard from "./ui/BaseCard.vue";
+
+export default {
+  components: {
+    BaseButton,
+    BaseCard,
+  },
+  data() {
+    return {
+      userName: "",
+      email: "",
+    };
+  },
+
+  methods: {
+    async submitForm() {
+      this.$store.dispatch("demo", {
+        userName: this.userName,
+        email: this.email,
+      });
+
+     
+
+      this.$router.push("/display");
+    },
+  },
+  created() {
+    console.log(this.$store.getters["test"]);
+  },
+};
+</script>
